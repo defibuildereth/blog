@@ -1,0 +1,90 @@
+---
+title: "The Effects of Compounding"
+date: 2022-02-18
+slug: "/the-effects-of-compounding"
+tags:
+  - "Strategy"
+---
+
+![](https://i.gyazo.com/4890fd3d95133fe723c686ab3440f75c.png)
+
+Credit: @jackbutcher
+
+A thought experiment...
+
+You start out working on day 1. Maybe you're writing code, blogging, making TikToks, whatever. The work you do on day 1 pays you 0.1 cents, per day, for the rest of your life. You also learn something while doing it, such that the value of your work on day 2 is 5% higher. So the work you do on day 2 pays you 0.105 cents per day for the rest of your life, and you earn 0.205 cents total.
+
+Proceeding like this, how long does it take to make:
+
+- $1?
+- $100?
+- $10,000?
+- $1,000,000?
+
+If you're a human, chances are you find these types of questions difficult to answer, as we are not built to understand the effects of compounding.
+
+### Our Ancestral World is 'Normal'
+Humans are built to intuitively understand normal distributions. For an example, take running. We understand that the best runners can be much faster than average. We could break it down further and reduce running speed to a few easily understood variables, as in:
+
+Speed = length of stride * strides/min
+
+Or some such a thing. The speed of runners (as with most physical quantities such as height, weight etc) roughly follows a normal distribution – some people can barely walk, some people are Mo Farah/Usain Bolt, but most people are in the middle.
+
+We understand that if we wanted to change some physical property about ourselves, the easiest gains would be those we made at the outset – as we improve, further gains of the same absolute magnitude become harder and harder. It’s considerably easier for you to reduce your 100m time by 1s than it is for Usain Bolt.
+
+### The Modern World is Not Normal
+In none-physical domains, the normal distribution is largely replaced by another, named after the Italian philosopher Pareto. Distributions of this type are radically different than those we are built to intuitively understand. For example, you could diligently calculate the average wealth of a million randomly selected members of the human race. Then on your 1,000,001th observation, you could draw Jeff Bezos, and find that the average wealth of your sample jumps from $1,000 to well over $100,000. I.e. you find that your average was a completely meaningless number, as 1 sample has made your previous million samples into a rounding error.
+
+This also applies such quantities as the number of people in settlements, the number of visitors to websites… even the effectiveness of a programmer.
+
+### Compounding Improvements Calculator
+I wrote a simple program to model situations such as the one described in the opening paragraph using NodeJS.
+
+```node
+let grandTotal= 0;
+
+const runDays = function (numDays, improvementFactor, startingEarningPower) {
+    for (let i = 0; i < numDays; i++) {
+        console.log(`running day ${i}`)
+        runDay(startingEarningPower*(improvementFactor**i))
+    }
+}
+
+const runDay = function (earningPower) {
+    grandTotal+=earningPower
+    console.log(`we've earned ${grandTotal}, today's work pays ${earningPower}`)
+}
+
+runDays(200, 1.05, 0.001)
+```
+
+Running this, we find that it takes 80 days to make our first dollar, and 363 days to make a million, by which time our work is adding $49,171.73 to our daily income :D
+
+Now, obviously this is just a model and it has substantial flaws. For example, it's fairly obvious to see that, while the limits are not as hard set as in running, it will still be the case that someone's ability to improve each day will start out high and gradually reduce over time in relative terms. However, there are some lessons to be learned.
+
+### Your Starting Point is Irrelevant
+Let's run two similar simulations to illustrate an important point. In the first case, we'll set someone off who's work is already quite valuable, but who's not improving quite as quickly - $10/day, but improving 'only' 2% each day. In the second case, it's someone who's work is worth just 1/100th of a penny, but who's learning fast - improving 10% per day.
+
+After 1 year, the first programmer's work is adding $13,504/day to his income. Not to be sneezed at, till you compare it with the second programmer, who's adding $116,664,143,664.85.
+
+So the numbers have obviously just become ridiculous at this point, and a less lazy author would recalibrate them to have some passing resemblance to reality (maybe 2% vs 0.2%?). But they serve their purpose in showing that, when playing an iterated game with compounding, your starting point is basically irrelevant in comparison with the rate at which you are improving. Programmer 1 was 1,000x as effective as programmer 2 at the start of the year, but ended up nearly 10,000,000x less effective.
+
+### What Can I Learn From This
+
+Lies, damned lies and statistics, right? - what does all this have to do with my reality today?
+
+> Seek wealth, not money or status. Wealth is having assets that earn while you sleep. Money is how we transfer time and wealth. Status is your place in the social hierarchy. [Credit: Naval (@naval) May 31, 2018](https://twitter.com/naval/status/1002103360646823936?lang=en)
+
+Though I was shitting on him for not working hard enough, programmer 1 ended up making $700,000 in his first year, and would end up making just short of a $1bn if he kept up his rate of improvement throughout year 2. This ridiculous ascent is enabled because he is building wealth, as opposed to selling his time for money.
+
+> You’re not going to get rich renting out your time. You must own equity - a piece of a business - to gain your financial freedom. [Credit: Naval (@naval) May 31, 2018](https://twitter.com/naval/status/1002103360646823936?lang=en)
+
+What does this mean for an aspiring builder in the crypto space?
+
+- When offering work to a DAO, ask for payment in their native token, not USDT (conditional of course on your believing in the project..).
+- If you're selling any type of software, think of a way to sell it on a subscription basis, rather than for a one-off fee.
+- Always, always be looking to scale up the value you can deliver your clients, the people around you, and the projects you're interested in.
+
+More than anything though, it means that you should take heart at those moments where you feel like you aren't getting anywhere, and seek most of all to maximise your own rate of learning. If the crypto bull thesis plays out and it becomes the primary mechanism by which people make transactions over the next 10+ years, the skills you can learn now are likely to be close to priceless in the years to come.
+
+Keep building and GL out there!
