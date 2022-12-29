@@ -1,0 +1,78 @@
+---
+title: "How To Build a Decentralised Website - Part 3"
+date: 2022-02-27
+slug: "/how-to-build-a-decentralised-website-part-3"
+tags:
+  - "How-To"
+---
+
+##### How to Build a Decentralised Website - the Ultimate Guide:
+
+1. [Understanding decentralisation](https://defibuilder.eth.limo/how-to-build-a-decentralised-website-part-1)
+2. [Understanding blockchains and funding (via tornado.cash)](https://defibuilder.eth.limo/how-to-build-a-decentralised-website-part-2)
+3. [Decentralised domain and hosting (via the Ethereum Name Service aka ENS and IPFS aka the InterPlanetary File System)](https://defibuilder.eth.limo/how-to-build-a-decentralised-website-part-3)
+4. [Full walkthrough: Building a website on ENS](https://defibuilder.eth.limo/how-to-build-a-decentralised-website-part-4)
+
+![](https://i.gyazo.com/4fb91752ff62217acb430b5fe8b82d76.png)
+
+Alright.
+
+So if you've followed along this far, you should have a freshly made ethereum wallet with some funds in it, which is going to form the basis on your new psuedo-nonymous identity on the blockchain.
+
+### What Is ENS?
+ENS (which stands for the Ethereum Name Service) is a decentralised alternative to domain registrars (like GoDaddy, NameCheap etc etc). Rather than providing personal details, all you need to register a .eth domain name is an ethereum wallet with some funds in it. Besides providing a means of obtaining a decentralised domain name, it also greatly simplifies the process of sharing ethereum account details (perhaps to receive payment), as any .eth address can be entered into the address field of a wallet, which can interpret the .eth address into the full ethereum wallet address format (0x123...). In this way, ENS functions with ethereum addresses like DNS functions with IP addresses - 2001:4860:4860::8844 becomes 'google.com' as 0x8cBd.. becomes 'defibuilder.eth'.
+
+### How to get a .ETH Domain
+Go to https://ens.domains/ and click 'Go to App'. Here you can check the availability of the domain name you fancy. Once you've found one you like, follow the guide to register it. Under 'records', you'll see you can add information about your Twitter, email, Discord and etc if you'd like to.
+
+### Can I Use .ETH Domain For a Website?
+Right now, it is possible to use a .ETH domain as the basis for static websites only. This means that while you can display content and link it together however you'd like, your .ETH website won't be able to collect email addresses, accept (non-crypto) payments, send emails or display any other type of dynamic content. Practically speaking, this means that .eth domains are good for displaying blogs (such as the one you're reading right now), but not good for more sophisticated web apps. It's also worth noting that in order to update your (static..) blog, you'll need to submit a new transaction to the ethereum network each time you update, which will cost you small amounts of gas each time. In building out this blog, I stumbled here as I was sure that this couldn't be the case, until I heard Vitalik himself on UpOnly say that he was updating in this way, and I was satisfied that if Vitalik couldn't figure it out, neither could I 😃
+
+That said, I believe this is a tractable problem, and I know that a significant proportion of the smartest minds in the world are focussed on solving it. So, while your .eth domain might not be able to host the website of your dreams right now, I think it's worth the effort to learn how the system works so that you can be the first to react to new developments as they inevitably happen. And so that you can have a cool-looking blog on your .eth address! If you're looking for work in crypto, sharing your thoughts on the space on a blog which concretely demonstrates your knowledge of the infrastructure seems like an excellent way to attract the people who's attention you are trying to capture.
+
+### ENS Website
+To build your website on your new .eth domain name, we're going to make use of the 'content' record, which you can set at the same time as the text records and wallet addresses attached to your ENS domain. As .eth domain names aren't yet regarded as 'top level' domains, we'll need to append .link to all links in order to visit the website we build in (most) browsers. For example, defibuilder.eth.link takes you to the homepage of this blog, defibuilder.eth does not. In this way we can use the content record of your .eth domain to point to any static web content.
+
+### ENS Domains and SEO Performance
+While they lack the ability to host dynamic content, don't think that this makes a .eth domain a bad choice for hosting a blog.
+
+I expected that using IPFS as a hosting platform would negatively impact the performance of this blog with regards SEO, but as you can see in the featured image, it performs about as well as any blog can.
+
+### What is IPFS?
+So how exactly do we use the content record of our .eth domain to point to a website? Enter IPFS.
+
+IPFS (Inter-Planetary File System) is a free, decentralised hosting service. Similar to bitcoin (and bittorrent), IPFS operates peer-to-peer, meaning anyone can run an IPFS node and contribute towards serving files in a permission-less way.
+
+### Pinata for ENS
+Though it's possible to use IPFS directly (and this is the best option if you don't want to use any centralised services at all), for simplicity and performance reasons we are going to use Pinata, which is built on top of IPFS and abstracts most of the difficulties of using the service.
+
+Once we've built our static site and we're happy with it (more on this later..), we'll simply upload the folder containing the site to Pinata and get the CID of our pinned content on IPFS.
+
+![](https://i.gyazo.com/34b6f6e3fdba38de802ef00fb93f49c7.jpg)
+
+We'll then set the content record of our .eth domain to this CID, prefixed with ipfs://
+
+```
+ipfs://'yourCIDhere'
+ipfs://QmbaFGY8QHGemLNX6mGaH2rtb3QCFxe6dfgNsSuqCy5MhL //example
+```
+
+### Full Tech Stack for a Decentralised Website
+Finally then, we have our plan. Having analysed all of our options and their associated trade-offs, we are going to upload our static website to IPFS through Pinata, then point our (anonymously funded) .eth domain to that website via the content record.
+
+Phew!
+
+Well done for making it this far - if your fingers are anxious to stop reading and start coding, you're in luck! It's at this point we can shift our focus from understanding the foundation upon which we're building, to producing the actual content we want to put on our .eth website.
+
+There's a huge range of options you could use to generate a static website. There's nothing to stop you writing the html/css yourself, and if there's a coding language you like to use, chances are there's a static website generator for that particular language. I'm sure there's also various online no-code tools you could find to do this job for you if you'd rather not see the command line.
+
+If you're new to all this (or if you're salivating over a 98 performance score..) and you want to use the same tools I used to make this blog, then we're going to use Ghost as our interface for generating content, and Gatsby to build a high performance static site. Check out part 4 for a full walkthrough of the process by which we point our .eth domain to some content.
+
+GL out there.
+
+##### How to Build a Decentralised Website - the Ultimate Guide:
+
+1. [Understanding decentralisation](https://defibuilder.eth.limo/how-to-build-a-decentralised-website-part-1)
+2. [Understanding blockchains and funding (via tornado.cash)](https://defibuilder.eth.limo/how-to-build-a-decentralised-website-part-2)
+3. [Decentralised domain and hosting (via the Ethereum Name Service aka ENS and IPFS aka the InterPlanetary File System)](https://defibuilder.eth.limo/how-to-build-a-decentralised-website-part-3)
+4. [Full walkthrough: Building a website on ENS](https://defibuilder.eth.limo/how-to-build-a-decentralised-website-part-4)
