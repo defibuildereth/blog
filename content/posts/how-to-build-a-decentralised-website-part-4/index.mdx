@@ -1,0 +1,89 @@
+---
+title: "How To Build a Decentralised Website - Part 4"
+date: 2022-02-28
+slug: "/how-to-build-a-decentralised-website-part-4"
+tags:
+  - "How-To"
+---
+
+##### How to Build a Decentralised Website - the Ultimate Guide:
+
+1. [Understanding decentralisation](https://defibuilder.eth.limo/how-to-build-a-decentralised-website-part-1)
+2. [Understanding blockchains and funding (via tornado.cash)](https://defibuilder.eth.limo/how-to-build-a-decentralised-website-part-2)
+3. [Decentralised domain and hosting (via the Ethereum Name Service aka ENS and IPFS aka the InterPlanetary File System)](https://defibuilder.eth.limo/how-to-build-a-decentralised-website-part-3)
+4. [Full walkthrough: Building a website on ENS](https://defibuilder.eth.limo/how-to-build-a-decentralised-website-part-4)
+
+So.
+
+A quick google suggests that there is no shortage of tools available for building static websites, nor is there a shortage of guides on how to use them. However, what I found was sorely lacking when I decided to host my new blog on my .eth domain was a walkthrough of how to get my content onto my .eth domain. Therefore what I want to do with the last article in this series is bring everything together and walk you through creating (or in my case updating) the site you want to put on your .eth ENS address. The process is exactly the same, whether or not you currently have any content or any site at all on your domain.
+
+All we'll need to get started is:
+
+1. An eth wallet (with some eth in it)
+2. The associated .eth domain you created in part 3.
+3. A Pinata account (or some other means of generated a CID with IPFS)
+4. A folder containing your content
+
+### Gatsby and Ghost
+I followed a walkthrough using Gatsby and Ghost, then simplified to just Gatsby and mdx. If you're newer to coding then perhaps a no-code/low-code solution such as Hugo would be more appropriate - pick whichever one suits you best and generate your content.
+
+For this blog, I generate the site with the `Gatsby build` command, which outputs content to a folder labelled 'public'.
+
+### 1. Upload your content to Pinata
+
+![](https://i.gyazo.com/4b35b2215ba7b958b043e5867be2c2ee.jpg)
+
+### 2. Copy the CID
+
+![](https://i.gyazo.com/d835beaf867497cbcba2ad158dea67d7.jpg)
+
+### 3. Go to ENS and click add/edit record
+
+![](https://i.gyazo.com/69208874d3fb6484fbc83025c78a26df.png)
+
+### 4. Paste in your CID, prefixed with ipfs://
+
+![](https://i.gyazo.com/121259abf5c364fcf0c7b0a483196b59.png)
+
+### 5. Scroll to the bottom and click confirm
+
+![](https://i.gyazo.com/0efce69c74d8bfc61a3713b2e5290829.jpg)
+
+### 6. Confirm again..
+
+![](https://i.gyazo.com/468434e3cec30a24fbc83c8286b63431.jpg)
+
+### 7. Set gas fee, check and confirm the transaction with your preferred wallet
+
+![](https://i.gyazo.com/7240cbac8ab66026c4279602a7bbc636.png)
+
+Note: assuming your blog update is not time-critical (and you don't have a heap of other transactions to do with this address, seeing as we made it solely to build this blog..) you can set a much lower gas fee and wait until the network is quiet, in order to save on gas.
+
+### 8. Wait for the transaction to be mined
+
+![](https://i.gyazo.com/c6d974b8384f5dd2849abbf4cac40dd0.png)
+
+### 9. Visit your site at 'yourENSname'.eth.limo
+
+![](https://i.gyazo.com/f6da8d7ea60ac1a577428c1c78d6f370.png)
+
+Success!
+
+Sincere congratulations if you made it this far. Building a blog on your .ETH address is substantially more difficult than using substack or whatever other blog/newsletter builder, for largely the same functionality. But, in my opinion, the juice is worth the squeeze.
+
+Plenty of people claim to care about decentralisation, web3 and freedom of speech, yet happily publish all their content on web2 services - therefore subjecting themselves to the whims of centralised authorities who can de-platform them at any time and for basically any reason. Though obviously these web2 platforms have a network effect and allow content creators to more easily reach lots of people, to me it feels like some mixture of lazy, ignorant and hypocritical to not make the effort to build on the decentralised web3 platforms that now exist.
+
+Though it will require more effort both to set up and update, building out your personal blog using ENS and IPFS will demonstrate a sincere commitment to the ideals of web3, plus a solid foundational understanding of the infrastructure upon which people are building the value layer of the internet - removing rent-seeking middlemen from transactions, including the other 99.9% of people in the financial system and circumventing the power of governments to deny human rights to political opponents through the weaponisation of the financial system.
+
+Worth it.
+
+I hope you enjoyed this guide, if you're stuck on any part of setting up your decentralised website, feel free to DM me on Twitter (@DefiBuilderETH) and I'll do my best to help you out. Do google your error first though 😁
+
+GL out there, keep building.
+
+##### How to Build a Decentralised Website - the Ultimate Guide:
+
+1. [Understanding decentralisation](https://defibuilder.eth.limo/how-to-build-a-decentralised-website-part-1)
+2. [Understanding blockchains and funding (via tornado.cash)](https://defibuilder.eth.limo/how-to-build-a-decentralised-website-part-2)
+3. [Decentralised domain and hosting (via the Ethereum Name Service aka ENS and IPFS aka the InterPlanetary File System)](https://defibuilder.eth.limo/how-to-build-a-decentralised-website-part-3)
+4. [Full walkthrough: Building a website on ENS](https://defibuilder.eth.limo/how-to-build-a-decentralised-website-part-4)
