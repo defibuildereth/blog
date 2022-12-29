@@ -1,0 +1,37 @@
+---
+title: "ZigZag Market Maker Helper v2"
+date: 2022-03-30
+slug: "/zigzag-market-maker-helper-v2"
+tags:
+  - "Strategy"
+  - "How-To"
+---
+
+![](https://i.gyazo.com/e0fbec63c5f0fbf449e1d907f0d975ac.jpg)
+
+What's up guys.
+
+Following on from the guide I wrote describing how to set up a simple market making bot on ZigZag Exchange (and so passively farm not one but TWO of the consensus most likely airdrops of the year)...
+
+Today I'm unveiling version 2 of the [ZigZag Market Maker Helper](https://github.com/defibuildereth/ZZ_MM_Helper_v2.0).
+
+NOTE: I am not officially affiliated with ZigZag in any way, and they do not endorse this software - any bugs within it are my fault alone, I make no guarantees whatsoever about it's efficacy and you could for sure lose money market making. So don't come crying to me if something goes wrong! This software is intended as a starting point and as a time-saver for people putting together their market maker config files/parameters - you should of course check everything yourself, think things through and use your brain to decide whether or not this tool is helpful or not.
+
+Now that's out of the way, let's get into the cool stuff we can do with this set of files/how to set it up.
+
+1. Ensure you can run bash and node. I made this on my mac, using Windows might require some extra setup. If you hit an error, google it!
+2. Clone the GitHub repo to your local machine.
+3. Edit and understand configGenerator.js - Your main decisions are 'thresholdAmount' (line 22) - this is the maximum dollar value of trades you're willing to make on normal pairs (e.g. ETH-UST). 'stablecoinMultiplier' (line 23) - this is how many times 'thresholdAmount' you're willing to trade on stablecoin to stablecoin pairs (the list of which is defined on line 27). 'minAmount' (line 24)- this is the minimum dollar value you're willing to trade and lastly 'liquidity' (line 54) - this is the multiplier by which you'd like to reduce the amount you're willing to trade, if a given pair has only 1 active market according to cryptowatch. You may also want to change the threshold amounts and constants for "delayAfterFill", "increaseSpreadAfterFill" and "changeSizeAfterFill" on lines 68-70.
+4. Run the commands in the README file in the order specified.
+
+What you should be left with is a long console log that looks like this:
+
+![](https://i.gyazo.com/7bdd7115dfd3ae629cac62250c7e8fcc.png)
+
+You'll see that this looks promising, but the formatting is a little off. As you are using the code of a noob, for now you'll have to fix it yourself by copy/pasting this output into your favourite text editor, and replacing every 'right curly brace, newline, left curly brace', with just a single comma. If you've checked it over and are happy with it, copy the result into your full config file, then cat the output and update your environment variable as described in the market maker readme.
+
+One flaw I've noticed - the price information for the DATA/ETH pair is off, as there are numerous tokens called data. Easiest to just delete that pair IMO.
+
+That said though, I think this method of programmatically generating the pairs object of the config file is a drastic improvement on typing things out manually. I hope you get some use out of this code and it saves you some time/helps your bot to fill a few extra orders. If anyone wants to improve the code (perhaps streamlining the UX into just 1 command or building a little UI) please feel free to submit a pull request through github, or just hit me up directly on Twitter (DMs open).
+
+That's it for today, keep building and GL out there!
