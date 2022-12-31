@@ -6,6 +6,7 @@ const shouldAnalyseBundle = process.env.ANALYSE_BUNDLE
  * @type {import('gatsby').GatsbyConfig}
  */
 module.exports = {
+  pathPrefix: '__GATSBY_IPFS_PATH_PREFIX__',
   siteMetadata: {
     // You can overwrite values here that are used for the SEO component
     // You can also add new values here to query them like usual
@@ -20,6 +21,7 @@ module.exports = {
   },
   trailingSlash: `never`,
   plugins: [
+    'gatsby-plugin-ipfs',
     {
       resolve: `@lekoarts/gatsby-theme-minimal-blog`,
       // See the theme's README for all available options
