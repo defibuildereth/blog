@@ -37,7 +37,7 @@ We can accomplish this by *buying* a put option, such that the two payoff struct
 
 Here the blue line represents the payoff structure from our hedge - the put option we've bought to offset our short put position from writing the atlantic straddle. The green line shows the *combined* payoff structure of the two options together. 
 
-If we can set up this situation, or something close to it, we'll either win the premium of the AS less the cost of our insurance (if the price goes up), or our insurance will pay off exactly enough to cover ouw downside (if the price goes down).
+If we can set up this situation, or something close to it, we'll either win the premium of the AS less the cost of our insurance (if the price goes up), or our insurance will pay off exactly enough to cover our downside (if the price goes down).
 
 I've shown a flat, positive green line here - so I've assumed the premium on our insurance is smaller than the premium of the atlantic straddles we've sold.
 
@@ -109,9 +109,19 @@ As you can see, so far this setup hasn't been turning a profit. I think this is 
 
 Also, I'm fairly sure that the setup aims to make 0 profit if the price falls, and positive profit if the price stays flat or rises. This is fair enough, but personally I'd rather a setup that approximates delta neutral as far as possible. I think this could be achieved by editing the script so it buys higher strikes - line 18 of utils/index.js. This would also have the side effect of shifting the focus onto strikes nearer the current price, which are typically more liquid (and therefore have lower spreads/IVs). 
 
+While these results aren't exactly encouraging, it's important to keep things in perspective:
+
+1. Utilisation has been low. 
+
+It's the holidays, not many people are speculating (see recent outlier [GMX](https://stats.gmx.io/) stats for reference.
+
+2. We are early.
+
+The code required to execute this arb was only written a few weeks ago - and right now we're 'only' talking about atlantic straddles with a couple hundred K total liquidity. If the dopex team comes close to realising their vision of 'OpFi' - defi powered by options - in 2023, the scale of this opportunity could grow exponentially. Therefore it's good to get this testing in now and iron out the inevitable kinks beforehand.
+
 I'm going to keep this experiment running for a while longer at least and keep tweaking the setup. In particular comparing liquidity on derebit as well as bybit would likely help with execution considerably.
 
-Then all we'll need is for dat glorious volatility to return to the markets and we'd potentially have a nice little profit machine set up.
+Then all we'll need is for dat glorious volatility to return to the markets, and for them to 100x+ in size, and we'd potentially have a nice little profit machine set up.
 
 That's it for today - don't hesitate to DM on Twitter/add me on Discord if you'd like help with something. 
 
