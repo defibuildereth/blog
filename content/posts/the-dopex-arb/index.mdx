@@ -1,0 +1,118 @@
+---
+title: "The Dopex Arb"
+date: 2023-01-02
+slug: "/the-dopex-arb"
+tags:
+  - "Strategy"
+  - "How-To"
+---
+
+What's up troops.
+
+The highly esteemed [tztokchad](https://twitter.com/tztokchad/status/1608214961473339392), bossman over at [Dopex.io](https://www.dopex.io/), recently published a new [medium article](https://medium.com/@tztokchad/options-options-options-8adfe1eecb8c) detailing how options can be used to power essentially the entire defi ecosystem. Lending markets, perp trading, stablecoin swaps - all of these pillars of defi can be thought of in terms of options. The roadmap for Dopex in 2023 is to tackle each of these massive markets and hopefully deliver meaningful improvements to them by using options under the hood. 
+
+### Atlantic Options
+
+Several times during the article he makes reference to an [arbitrage](https://en.wikipedia.org/wiki/Arbitrage) opportunity available to those supplying liquidity for [Atlantic Options](https://blog.dopex.io/articles/dopex-papers/atlantic-strategies-providing-liquidity-for-atlantic-straddles). The purpose of this article is to examine this opportunity in more detail and provide a guide and walkthrough for anyone who wants to dabble, using atlantic straddles as our example. 
+
+### Writers' Payoff
+
+Due to how atlantics function, when atlantic straddles are bought,  writers end up with a payoff that looks like this:
+
+![](https://i.gyazo.com/86699bcc3652de3fdb2c8c60ae959f67.png)
+
+The red line shows how writers' payoff varies with the price of ETH at expiry - if it finishes higher than the price at which the buyer bought, they win the premium. If it finishes lower, they lose at a fixed rate, meaning they have some lower breakeven point. 
+
+If you're familiar with options, you should recognise this payoff as equivalent to a short put position.
+
+On it's own, we can assume that writing options in this way is close to 0EV. The options we've sold are priced according to the Black-Scholes model (more on which later), so probably the buyers are being offered a roughly fair gamble. 
+
+### Delta Neutral - A Perfectly Hedged Scenario
+
+In options parlance, delta refers to the price of the underlying asset, here ETH. So, if we're trying to create a risk-free arbitrage opportunity, what we need to do is create a situation where our payoff is flat - i.e. it doesn't vary at all with the price of ETH at expiry. 
+
+We can accomplish this by *buying* a put option, such that the two payoff structures cancel each other out. Here is the aggregate payoff graphically for you visual thinkers:
+
+![](https://i.gyazo.com/4eae89908dc1bf8aeb550c30273e441f.png)
+
+Here the blue line represents the payoff structure from our hedge - the put option we've bought to offset our short put position from writing the atlantic straddle. The green line shows the *combined* payoff structure of the two options together. 
+
+If we can set up this situation, or something close to it, we'll either win the premium of the AS less the cost of our insurance (if the price goes up), or our insurance will pay off exactly enough to cover ouw downside (if the price goes down).
+
+I've shown a flat, positive green line here - so I've assumed the premium on our insurance is smaller than the premium of the atlantic straddles we've sold.
+
+### Where Does This Free Money Come From??
+
+Proponents of the [efficient market hypothesis](https://en.wikipedia.org/wiki/Efficient-market_hypothesis) are foaming at the mouth right now. How could it possibly be the case that we can lock in a risk-free profit? Is this money falling from the sky??
+
+It's a fair question.
+
+### Volatility
+
+You'll remember I mentioned that the options we sold are priced by a smart contract according to a [formula](https://en.wikipedia.org/wiki/Black%E2%80%93Scholes_model). One of the key variables in this formula is volatility - a measure of how violently the price of a thing moves up and down over time. 
+
+The Atlantic Straddles smart contracts are fed information about volatility from [chainlink oracles](https://blog.dopex.io/articles/marketing-campaigns/dopex-upgrades-to-chainlink-price-feeds). These oracles source their information from numerous sources, including Bybit and Derebit (two centralised crypto option exchange platforms). 
+
+Crucially, after this volatility information is aggregated, *they add 5% on top*. So if, for example, the current market conditions imply a number of 80 for volatility, the dopex smart contracts will price atlantic straddles as if volatility were 85. 
+
+This means these options are slightly overpriced given current market conditions. 
+
+Of course, that doesn't mean that buyers are making a mistake by buying. Firstly, atlantic options are currently only available on dopex, which means it's hard for users to replicate the payoff structure on these options on other platforms. Also, 5% isn't much in the grand scheme of things, and plenty buyers are willing to pay a premium to keep their activity on-chain, rather than trusting a centralised exchange. This is especially true in the wake of the FTX scandal.
+
+### Backtesting
+
+[Backtesting](https://en.wikipedia.org/wiki/Backtesting) is far from a fool-proof means of figuring out whether a strategy is going to make money. Just because prices moved a certain way in the past, does not mean they're guaranteed to continue that way in the future. 
+
+However, the chads at Dopex have given us a beautiful tool to simulate this strategy. So if we're thinking about giving it a shot, we may as well look before we leap. If you want to follow along yourself or play around with the model, you'll find the repository [here](https://github.com/tztokchad/straddles-hedge-sim). 
+
+Running the sim, we can see that, though it obviously doesn't make money every single epoch, this strategy would have substantially outperformed holding ETH over most time periods. 
+
+### Assumptions
+
+The model makes numerous simplifying assumptions that might not perfectly reflect reality. 
+
+1. The Price of Insurance
+
+In lines 12-25, you can see that the model assumes options will be available at exactly the price expected by the Black-Scholes model given the volatility. In practise, the markets for these options aren't always super liquid, and there can be substantial spreads to cross in order to get the insurance in place.
+
+![](https://i.gyazo.com/a0f7946b24e02f3aaf697718bdb137e4.png)
+
+2. Non-Uniform Volatility
+
+Look again at the above image. In the red box, below the ask price on the relevant option, we see a percentage. This percentage is the implied volatility which corresponds to the ask price for that option. So, while the implied volatility (IV) for the mark price on the option with strike closest to the current price is 31.89%, the IV on the option the implementation model would buy in these conditions is 56.7%. This is a big deal, because buyers of Atlantic Straddles were being quoted a price based on an IV of 36 when this screenshot was taken. 
+
+3. Strike Mismatches
+
+Dopex AS buyers are written options given the current price of ETH, whatever that may be. For obvious reasons, the strikes on Bybit and elsewhere are bucketed into round numbers, usually multiples of 25. This means that it's not possible to exactly match the strikes of the options being sold by the AS vault. In turn, this means that the point at which your insurance starts paying off will not exactly match the point at which you start losing money to option buyers. 
+
+So while we'd like to have a situation where our green line is flat and positive, in reality the best we'll be able to do even under perfect conditions is to create a more bumpy payoff structure - not perfectly delta-neutral, but hopefully still +EV.
+
+A related limitation - on bybit, the smallest unit size is 0.1. This means that for smaller vault deposits and option buys, the amount of insurance we'd want may be smaller than the minimum, therefore again we can't create a perfectly flat line relative to the price movements.
+
+4. Full Utilisation
+
+The model assumes that the vault sells out every single epoch. This means that writers collect more premiums than in practise, where sometimes there simply aren't that many buyers. In these circumstances, AS writers end up with capital that's essentially idling in the vault. Not a disaster, but a limitation nonetheless. 
+
+### Implementation
+
+Ok, so this is all fine in theory, but what happens when the rubber meets the road?
+
+Once again, the fine fellows at Dopex (with just a tiny bit of help from yours truly) have done the heavy lifting for us here. The required repo is [here](https://github.com/tztokchad/straddles-hedge).
+
+All we need to do is edit .env.sample to include a Bybit API key and secret (obviously keep these to yourself), plus the address we've used to deposit into the Atlantic Straddles contract and a means of communicating with the blockchain (I'm using Alchemy for this as I was having connection issues). Save the result file as .env and you're ready to rock. 
+
+### Results
+
+![](https://i.gyazo.com/83cef427d5bfde747977854c37534d86.png)
+
+As you can see, so far this setup hasn't been turning a profit. I think this is mainly due to liquidity issues for the relevant options on bybit - very often the spread is so wide that the IV on the options purchased is considerably higher than the IV on the vault itself. 
+
+Also, I'm fairly sure that the setup aims to make 0 profit if the price falls, and positive profit if the price stays flat or rises. This is fair enough, but personally I'd rather a setup that approximates delta neutral as far as possible. I think this could be achieved by editing the script so it buys higher strikes - line 18 of utils/index.js. This would also have the side effect of shifting the focus onto strikes nearer the current price, which are typically more liquid (and therefore have lower spreads/IVs). 
+
+I'm going to keep this experiment running for a while longer at least and keep tweaking the setup. In particular comparing liquidity on derebit as well as bybit would likely help with execution considerably.
+
+Then all we'll need is for dat glorious volatility to return to the markets and we'd potentially have a nice little profit machine set up.
+
+That's it for today - don't hesitate to DM on Twitter/add me on Discord if you'd like help with something. 
+
+GL out there!
