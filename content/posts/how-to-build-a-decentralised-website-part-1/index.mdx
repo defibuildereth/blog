@@ -1,51 +1,55 @@
 ---
-title: "How To Build a Decentralised Website - Part 2"
-date: 2022-02-26
-slug: "/how-to-build-a-decentralised-website-part-2"
+title: "How To Build a Decentralised Website - Part 1"
+date: 2022-02-25
+slug: "/how-to-build-a-decentralised-website-part-1"
 tags:
   - "How-To"
 ---
 
 ##### How to Build a Decentralised Website - the Ultimate Guide:
 
-1. [Understanding decentralisation](https://defibuilder.eth.limo/how-to-build-a-decentralised-website-part-1)
-2. [Understanding blockchains and funding (via tornado.cash)](https://defibuilder.eth.limo/how-to-build-a-decentralised-website-part-2)
-3. [Decentralised domain and hosting (via the Ethereum Name Service aka ENS and IPFS aka the InterPlanetary File System)](https://defibuilder.eth.limo/how-to-build-a-decentralised-website-part-3)
-4. [Full walkthrough: Building a website on ENS](https://defibuilder.eth.limo/how-to-build-a-decentralised-website-part-4)
+1. [Understanding Decentralisation](https://defibuilder.eth.limo/how-to-build-a-decentralised-website-part-1)
+2. [Understanding Blockchains and Funding (via tornado.cash)](https://defibuilder.eth.limo/how-to-build-a-decentralised-website-part-2)
+3. [Decentralised Domain and Hosting (via the Ethereum Name Service aka ENS and IPFS aka the InterPlanetary File System)](https://defibuilder.eth.limo/how-to-build-a-decentralised-website-part-3)
+4. [Full Walkthrough: Building a Website on ENS](https://defibuilder.eth.limo/how-to-build-a-decentralised-website-part-4)
+5. [Update: Definitely Just Use Fleek](https://defibuilder.eth.limo/how-to-build-a-decentralised-website-part-5)
 
-![](https://i.gyazo.com/39431082d31649372224e33216607baa.jpg)
+> There are no other constitutional rights in substance without freedom to transact. [@Punk6529](https://twitter.com/punk6529/status/1494444624630403083?lang=en)
 
-### Update!
-I guess in retrospect it was always a possibility, but as of 8th August, OFAC has officially sanctioned Tornado Cash. So it's now considerably more risky to use this method, actually I would now strongly advise against it.
+What's up guys.
 
-As I mentioned in part 1, one of the challenges we have in building a decentralised website is paying for our domain name without that payment going through a centralised service (Stripe, Paypal etc).
+Seeing the situation with the Canadian truckers and the weaponisation of the financial system got me thinking. I highly encourage you to read @punk6529's thread in full if you haven't already. Though it sounds suspiciously like the ravings of a conspiracy theorist, given that the technological tools exist for governments to censor the free speech of public figures (using web2 tools as their platform), it is perhaps just a matter of time until a meaningful amount of well-intentioned people are looking for a complete guide on how to share their thoughts with the world on a censorship resistant platform. I say a matter of time, but I'm sure a substantial proportion of people would argue that the de-platforming of Alex Jones in 2018 was a landmark moment in terms of web2 companies, at the behest of the government, acting in concert to drastically limit the reach of a popular but controversial figure.
 
-Before we get into Tornado cash, I'm going to do a quick blockchain basics refresher for those of you who are newer to the space. I encourage you to read it even if you think you understand these concepts, so you can be sure we're on the same page (and so you can correct me if I'm wrong!).
+So here it is - the ultimate guide on how to build a decentralised website using ENS.
 
-### What is Blockchain?
-The best analogy I've heard for understanding a blockchain is that it's like a database but with certain special properties:
+### Can a Website be Censored?
+To understand what we're going to build, we first have to understand the mechanics by which websites are censored. Normally, when you register a domain name, you are required by law to provide information such as your name and address, plus some means of payment. If the content on the website is considered to be in violation of the law, the government will order the business you used to register the domain (GoDaddy, HostGator, NameCheap etc) to take down the content, or take down the website altogether.
 
-1. Writing is costly. Like a normal database, reading from a blockchain is free. Unlike a normal database, writing to a blockchain is not free - you must pay a fee to miners in return for them including your transaction in the next block. This fee varies depending on demand for block space and which blockchain you're using, see 'The Scalability Trilemma' on Vitalik's blog.
-2. It's distributed. Where normal databases exist in just one (or a few) locations, properly decentralised blockchains allow any user to run their own node and independently verify the state of the chain. As I type this, I'm running my own bitcoin node - with a can-do attitude, you can too (here's the code). The nodes come to consensus on the state of the chain, meaning that if one person/node tried to claim some bitcoin that wasn't truly theirs, the rest of the nodes would immediately identify the fraud and refuse to include the invalid transaction in the block.
-3. It's immutable. There is no such thing as a delete function on a blockchain - once a transaction is accepted by miners and included in a block, there is no option for a user to take it back. If an attacker obtains your private key and steals your funds, there are no take-backs, no refunds and no-one to complain to.
+On the large web2 platforms such as Twitter, YouTube, Facebook etc the censorship process is more simple to execute and more extensively used. Concerningly, it's also not necessarily beholden to any law - if you share or produce content which is against the stated terms of the site, your right to use the platform will simply be removed. Several web2 companies have come under fire for applying their rules in an inconsistent, some would say arbitrary way, de-platforming people for their views or their politics, in direct contradiction with the first amendment.
 
-This immutability property is both a bug and a feature. With the traditional banking system, where fraud or user error occurs the consumer has means of retrieving the funds. Trusting the blockchain as a means of storing value implies trusting yourself to do a good job of keeping your private keys/seed phrase secure.
+### What Is a Censorship Resistant Website?
+A censorship resistant website is one which is robust to the methods by which government agencies (or large web2 companies) would seek to take down content. The key to creating one is to use infrastructure which is decentralised rather than centralised.
 
-### Is Blockchain Anonymous?
-While many have pointed out that the relative anonymity of the blockchain potentially provides a safe haven for tax avoidance and money laundering, fewer people understand that the immutability of the blockchain actually means that once you compromise the identity of your accounts, they stay compromised and there is no means of un-doing it. For example, let's say a user gets some cryptocurrency from a centralised exchange/friend/whatever, then swaps it for another token on a decentralised exchange. Is that money now held anonymously?
+### What do you Mean by Decentralisation?
+Decentralisation is a much used, often misunderstood term. A service is decentralised if there is no one authority with the power to withhold the right to use the service from any given customer. Public blockchains are a good example of this - it is practically impossible for any authority to remove someone's right to transact on the Bitcoin network, as was beautifully expressed by Nunchuk in response to the Ontario Superior Court of Justice.
 
-Absolutely not. If/when the exchange seeks to comply with regulation in whatever country, they will of course provide all the relevant KYC/AML information demanded by the government regarding all the accounts on their site. It will then be easy for authorities to use a blockchain explorer such as Etherscan to track the movement of these funds around whatever chains/tokens.
+![](https://i.gyazo.com/ca5467931b9ed75b6479c0af1cbb3c64.png)
 
-I recently explained this to someone IRL, who responded to the effect of "the government is too incompetent to do that". This is a ridiculous response. Even if you believe that the current day government won't investigate you in particular, perhaps because the amounts involved are small, you have to consider that in the future, it's inevitable that even the most incompetent governments will acquire software tools that can unpick the connections between accounts without much human input, and so de-anonymise the blockchain.
+### Limitations of the Decentralised Web
+This guide will walk you through the process of building a decentralised website. While you might be in a rush to get started, I encourage you to go slow with the process, to think through all your options thoroughly and to use your brain. This is a spot to use Murphy's Law - anything that can go wrong will go wrong. If you absent-mindedly use some service for which you need to supply your personal details and - even temporarily - publish something that links to your real world identity, it's possible that in a full-blown apocalyptic scenario your website will remain online longer than your right to use the financial system/enjoy the due process of the judicial system. Bear in mind that you are taking actions on the blockchain which can never be undone, and you are potentially operating in the view of both sophisticated players today and the exponentially more sophisticated players of the future.
 
-With that said, there are tools that allow a thoughtful user to obscure their identity.
+On top of this, as the technology currently stands today you can only host static websites on fully decentralised services, which means your website is subject to some limitations, plus updating the site is a slightly more complicated than it is on the equivalent web2 platforms.
 
-### Tornado Cash
-Tornado cash is a service which functions like an anonymous deposit box for the blockchain. In units from 0.1 to 100 ETH, users can deposit Ethereum into the service and receive a cryptographic receipt (in the form of a simple .txt file). The receipt is a claim on the equivalent value of the funds (less some gas costs), but it is not tied to any specific deposit. In this manner, an ethereum wallet with no history and no ETH to pay the transaction cost can cash in the receipt and receive ETH to their address, without any way for an observer to know for sure which deposit funded the claim.
+Also, a disclaimer: while the guide I'm sharing with you represents all I've learned in the last few months about building a fully decentralised website, I cannot make any guarantees as to its' efficacy, and I definitely would not trust my life/freedom to it. While it's probably sufficient to publish a simple blog where doxxing your identity is at least difficult for a normal internet user, it's almost certainly not going to be secure enough such that a high-profile government target (I'm thinking of Edward Snowden) could shield their identity. For example, your ISP has a complete record of your internet history, so it's possible that they would be able to make a highly accurate guess as to your identity if they were incentivised to.
+
+Now that we understand why this decentralised property is important, let's establish how blockchain technology can help with this problem. Move on to part 2 to get to grips with the foundation upon which we will build our metaphorical house..
+
+GL out there.
 
 ##### How to Build a Decentralised Website - the Ultimate Guide:
 
-1. [Understanding decentralisation](https://defibuilder.eth.limo/how-to-build-a-decentralised-website-part-1)
-2. [Understanding blockchains and funding (via tornado.cash)](https://defibuilder.eth.limo/how-to-build-a-decentralised-website-part-2)
-3. [Decentralised domain and hosting (via the Ethereum Name Service aka ENS and IPFS aka the InterPlanetary File System)](https://defibuilder.eth.limo/how-to-build-a-decentralised-website-part-3)
-4. [Full walkthrough: Building a website on ENS](https://defibuilder.eth.limo/how-to-build-a-decentralised-website-part-4)
+1. [Understanding Decentralisation](https://defibuilder.eth.limo/how-to-build-a-decentralised-website-part-1)
+2. [Understanding Blockchains and Funding (via tornado.cash)](https://defibuilder.eth.limo/how-to-build-a-decentralised-website-part-2)
+3. [Decentralised Domain and Hosting (via the Ethereum Name Service aka ENS and IPFS aka the InterPlanetary File System)](https://defibuilder.eth.limo/how-to-build-a-decentralised-website-part-3)
+4. [Full Walkthrough: Building a Website on ENS](https://defibuilder.eth.limo/how-to-build-a-decentralised-website-part-4)
+5. [Update: Definitely Just Use Fleek](https://defibuilder.eth.limo/how-to-build-a-decentralised-website-part-5)
