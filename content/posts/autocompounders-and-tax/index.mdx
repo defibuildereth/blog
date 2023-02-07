@@ -1,0 +1,57 @@
+---
+title: "Autocompounders and Tax"
+date: 2023-02-07
+slug: "/autocompounders-and-tax"
+tags:
+  - "Strategy"
+---
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/cY_-GbttlhA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+"What you are about to witness is my thoughts (just my thoughts man). Just what I was feelin at the time, you know what I mean??"
+
+***None of my posts, least of all this one, should be mistaken for financial, investment or tax strategy advice. I am a random degen impersonating a golden frog on the internet, and literally one of the world's least credible people. If you want proper tax or investment advice, you should seek out a suit-wearing professional. Definitely don't listen to anything I say.***
+
+I think I made a massive mistake with my farming strategies in 2021/2022.
+
+Thinking I was clever, I was prioritising tokens that delivered staking rewards, like a true passive incoooomer.
+
+I didn't realise then that, where I live (in the UK), staking rewards are classed as income, and taxed as such. Therefore, every time I claimed rewards I was putting myself on the hook to pay up to 45% of the reward amount to the government. 
+
+The way the tax system works here, you have to pay the full whack of your income taxes by January 31st, plus make a down payment in advance for the next year. So in spite of hearing the warnings of OGs about avoiding liquidity events and situations where you're a forced seller, I was forced to sell some internet coins I didn't want to sell to remain a free subject of the realm.
+
+Kinda uncool, but this is the world we live in.
+
+However, I got to thinking...
+
+Suppose that I'd been smart, and used an [ERC4626](https://ethereum.org/en/developers/docs/standards/tokens/erc-4626/) style autocompounder, letting a smart contract claim the rewards and reinvest them automatically on my behalf...
+
+I have tried without success to speak to a professional about this, and again I am the exact opposite of an authority on the subject. But, it strikes me that since we're no longer receiving anything that could be considered income, there's potentially a tax efficiency there.
+
+It could be argued that, when you deposit your LP tokens into the contract and receive the receipt token, you've traded in/disposed of that LP token for another token. If or when it becomes time to sell and you hopefully get more LP tokens out than you put in, it could be argued that you've just done a good job of playing capital markets and made a capital gain (taxed at as low as 10%).
+
+An analagous spot would be an investment in a property company/trust/whatever. If you choose to take the profits as income directly, they're (presumably, I obviously don't know) treated as income. If you choose to reinvest/compound them on the other hand, maybe that's regarded as a capital gain? 
+
+I simply can't emphasise enough the plain fact that I don't know, and these are just my random thoughts. I have not done anywhere near the amount of research you might think I have on this, you would definitely do a far better job researching it yourself. Even then, you should speak to a professional about it. Please, please don't listen to me because I'm making all of this up and I don't know. 
+
+But..
+
+When I was putting together my own tax return this year, I did notice that the calculator product I use (who are also at pains to point out that they are not an authority and don't know) did interpret some transactions this way. 
+
+For a HYPOTHETICAL example, say I deposited 10LP tokens into an abracadabra cauldron where the APY automatically reinvests and the value of your deposit goes up without you actively claiming any rewards. So let's say I receive 8 aLP tokens as a receipt. 
+
+After some time passes, I trade in those 8 aLP tokens back to the contract and receive 11LP tokens (due to the autocompounding effect). I then sell them all.
+
+For the first 10 LP tokens (for which I have a purchase price), the difference between the sale and purchase price is what I pay capital gains on. The calculator I used interpreted that 11th LP token as a 0 cost sale, and counted the (entire) proceeds as a capital gain. Not income.
+
+As far as I can see (searching not very thoroughly on gov.uk, do your own fucking research ffs) there is no advice or precedent in this area. 
+
+Certainly it would be an absolute pain to look at the autocompounder contract, go through every harvest event, pro-rata your share of the contract at that time, figure out how much staking income was claimed on your behalf, add that all up and etc (or whatever process if it was to be decided this was to be treated as income). But TBF I'm sure it could be done if His Majesty's Revenue and Customs decides that's how it is to be (calm down federalis).
+
+But yeah - this struck me as interesting enough to look into further, so for my next magic trick I will be putting my newly learned solidity skills into action and building an autocompounder contract for the main DPX/WETH sushi farm. If it turns out that I'm full of shit (most likely scenario), it'll still be worthwhile as a learning experience and save some (very risk tolerant) folks some time spent clicking through transactions, plus some pennies in gas costs. 
+
+On the off-chance the proper people agree with this baseless conjecture, it might also save the dopex community a few pennies on their collective tax bills in future years.
+
+***Final reminder - this is not tax, investment or financial advice of any kind. If you want any of these things, speak to a properly licensed professional who knows how things work in your tax jurisdiction. I am completely speculating here, and I haven't done any kind of research whatsoever to back it up.***
+
+GL out there folks!
