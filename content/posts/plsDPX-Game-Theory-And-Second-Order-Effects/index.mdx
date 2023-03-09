@@ -1,0 +1,43 @@
+---
+title: "plsDPX, Game Theory and Second Order Effects"
+date: 2023-03-09
+slug: "/plsdpx-game-theory-and-second-order-effects"
+tags:
+  - "Strategy"
+---
+
+What's up guys.
+
+First off, let me just state I'm a fan of PlutusDAO. Anyone who recognises my avatar will recognise a clauset Dopex-maxi, I took part in Plutus' TGE and still hold some of their token. So although it pains me to say it, I think it needs to be said:
+
+IMO, Plutus have made a substantial mistake in moving plsDPX-DPX liquidity from Sushi to Camelot and implementing a 2% exit charge for selling plsDPX.
+
+For quite a while now, the plsDPX-DPX "peg" (which is of course not a peg at all) has been the subject of much discussion in the [PlutusDAO Discord](https://discord.com/invite/plutusdao). Lots of users are understandably annoyed that after (irreversibly) converting their DPX to plsDPX at 1:1 through the frontend, the plsDPX they're left with can't be traded back to (more liquid) DPX at anywhere near 1:1. 
+
+After MUCH patient question answering by the tireless mods, the team decided to [take some action](https://medium.com/@plutusdao.io/camelot-migration-guide-cead2d9ba58f) with the goal of fixing the problem. 
+
+![](https://i.gyazo.com/7ee057b71dc48af5c0216b005477a658.png)
+
+At first glance, this seems like a reasonable solution. People are selling plsDPX to DPX, this lowers the relative price of plsDPX, let's discourage them from doing that by making it more expensive. 
+
+The problem is the second order effect. That is, people considering buying plsDPX see there's a 2% charge if/when they ever want out, and therefore decide not to. Therefore as well as selling pressure being reduced (1st order effect), buying pressure is also reduced (2nd order effect). We can see this play out in the market on camelot:
+
+![](https://i.gyazo.com/4ea7cbf0c3c3e41cee7bdd67325dca97.png)
+
+This is a substantial problem if Plutus hope to keep accumulating DPX governance power. Right now it's a clear mistake for anyone to convert DPX to plsDPX at 1:1, given that their 1DPX buys close to 1.1plsDPX on camelot/sushi (credit to the team for drawing attention to this on the frontend). 
+
+While the new camelot pool has attracted good liquidity, the old sushi pool with much lower liquidity appears to be getting the lion's share of volume (34k vs 17k today, admittedly I haven't been following this closely), as sellers don't want to pay the 2% sell fee on camelot, and buyers obviously follow sellers. 
+
+IMO the sustainable road to fixing the peg/liquidity problem is to make holding plsDPX *more* advantageous/appealing, not less. One method of doing this would be to increase the PLS rewards streamed to plsDPX holders and plsDPX-DPX LP's. Another would be to LOWER the cost of trading between the two. This is obviously a tough tradeoff as emissions dilute current holders, but if people are going to continue converting DPX to plsDPX they simply must have a good incentive to do so. Right now there is none. 
+
+I think it's fairly clear that the sales tax as currently implemented isn't having the desired effect. Thankfully looking at the pool contract, it seems like an easy fix to undo.
+
+![](https://i.gyazo.com/a8b0a358717ea9fd4b25c1ed7e0756de.png)
+
+Once again, I'm a fan of the Plutus team and their products and I don't want this to be taken as criticism. These things aren't easy to predict in advance and I could still end up being wrong anyway. I think this change was motivated by good intentions to restore the peg, but given it hasn't achieved it's aim I think it's time to pull the plug - setting the sell fee back to 0.3% would ensure volume does follow the liquidity from sushi to camelot, while still helping bias order flow towards buys, hopefully restoring the peg over time.
+
+That's it from me - if I've made any mistakes with this or if you disagree, my DMs are open on Twitter I'd be happy to hear from you.
+
+GL out there!
+
+D
