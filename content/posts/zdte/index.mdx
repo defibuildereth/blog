@@ -1,0 +1,68 @@
+---
+title: "Zero Day To Expiry Options - Bot Idea"
+date: 2023-05-09
+slug: "/zero-day-to-expiry-options"
+tags:
+  - "Strategy"
+  - "How-To
+---
+
+What's up guys. 
+
+The bera market is biting hard, so to help you feed your familia, your old pal defibuilder is going to share a free money bot idea he's just come up with.
+
+If building a bot that interacts with the blockchain sounds like pretty scary stuff - it fucking should do! But once again, I've got you covered - check out [the series I'm putting together on YouTube](https://www.youtube.com/playlist?list=PL3Zyg3RFQ_c8zvSeYPYm_l18y_KJ-IH2u) which will get you started.
+
+The crypto twitter afficionados amongst you will likely know that [the ethereum foundation](https://ethereum.org/en/foundation/) are renowned for their impeccable market timing. Unlike this humble golden frog, they've managed to [sell the top](https://www.newsbtc.com/news/ethereum/the-ethereum-foundation-sold-at-the-top-again-did-they-know-something-we-didnt/) not just once, but amazingly consistently over a period of many years. 
+
+Obviously, this kind of market wizardry doesn't go unnoticed for long, so these days when their coins move, it's BIG news on CT. [This one tweet](https://twitter.com/lookonchain/status/1654676063618990085) is the first I found regarding the coins that moved 2 days ago, and it has nearly 600k views on it's own. So, whether or not you personally think it's likely to move the market, it's safe to assume a lot of people now see it as super bad news.
+
+Which is undoubtedly bad news for our bags. But, if we're smart, we can reduce the sting a little bit. After all, we're *not* koolaid drinking up-only morons, we're savvy market participants who can make money in both directions, right?
+
+RIGHT???
+
+Fine me neither.
+
+But let's pretend for a moment.
+
+Imagine you set up an event listener, and monitored [the ethereum foundation's address](https://etherscan.io/address/0xde0b295669a9fd93d5f28d9ec85e40f4cb697bae) with their remaining $600m worth of ETH. Now, the second they move some of that precious, precious ETH, your bot - soldiering away night and day while you live your life - knows within microseconds. 
+
+These microseconds, my friends, are real alpha. A thing has happened, a thing which tens of thousands of degens like you will potentially act on, and you know before they do.
+
+We finally have a chance to be FIRST.
+
+What shall we do with this precious information? 
+
+Well, obviously we could sell our ETH. 
+
+This option sucks because we lose our exposure, and even if we're clever enough to buy them back after the coming dip, we only win whatever % the ETH goes down.
+
+We could open a leverage short on GMX. 
+
+This is certainly better, but we run the risk of getting liquidated by a scam-wick.
+
+What we want is to place a high leverage, directional bet on a short term price movement with no risk of liquidation.
+
+And fortunately for us, the absolute LADS at [Dopex](https://app.dopex.io/zdte/eth) have just released a product that allows us to do just that - zero day to expiry options. 
+
+Check this shit out:
+
+![](https://i.gyazo.com/94e2a6bcff1750504f636dd857112291.png)
+
+In this illustration, we take the princely sum of $420.69, and simultaneously go long put options with strike 1825, and short corresponding puts with strike 1675. Because these options expire soon (in... zero days) they are relatively 'cheap' compared with longer durations like weeklies or monthlies. What this means for us is a potential payout of $7,064.91 if ETH is trading at $1,675 or below when the options expire - that's a potential 16.8x in less than a day!
+
+Obviously that's a best case scenario, and the numbers would obviously depend on the volatility in the market when your bot places the bet. But, it's also important to realise our bet isn't only paying out if the price falls >10%. Check out the payoff curve, and see that in order to breakeven we only need ETH to fall 1.77%! Anything more than that are we're profiting something like $50 for every $1 ETH falls.
+
+It's a pretty sick risk/reward given we've absolutely no risk of getting liquidated.
+
+If we were confident that ETH would fall at least a decent bit on this news, we could tweak our bet and go long strike 1800 (or lower) - this would increase the amount ETH needs to fall till we breakeven, but also increase the amount we get paid as it falls further. 
+
+If we wanted to ramp up the risk/reward ratio even more, we could bet on options with even shorter expiries (as short as 1m!) via another recently released and very cool Dopex product - [scalps](https://app.dopex.io/scalps/ETH). 
+
+Although I'm sure everyone reading this is #downbad, don't ignore what you're seeing in front of your eyes. ZDTE options are an amazing defi innovation - to me it seems clear that no one is shipping anywhere like as fast as Dopex. Not Financial Advice kek.
+
+Chads, the lot of them.
+
+That's it for me - follow me on [Twitter](https://twitter.com/defibuildereth)/[Youtube](https://www.youtube.com/channel/UCZ1ELOrti3Tk0LYoiSzWWeQ) for more stuff like this.
+
+GL out there!
