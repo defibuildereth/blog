@@ -1,0 +1,64 @@
+---
+title: "Ramses Hedgoor"
+date: 2024-8-10
+slug: "/ramses-hedgoor"
+tags:
+  - "Strategy"
+  - "How-To"
+---
+
+![](https://i.gyazo.com/2c89c4d8f88b24bd3f2ab2688b660444.png)
+
+What's up everyone. 
+
+Like many degens, I've been playing around with concentrated liquidity (CL) providing on Ramses (as well as other exchanges).
+
+As most of you probably know [Uniswap v3](https://blog.uniswap.org/uniswap-v3) type positions are placed over a range. If the relative price of the tokens moves outside that range, your position will be entirely 1 token (the one that has performed less well).
+
+For example, if you provide ZRO and WETH liquidity on [Ramses](https://app.ramses.exchange/dashboard) (a fork of uniswap v3), and ZRO moons relative to ETH, you'll end up holding pure ETH. On the flipside, if ETH moons while ZRO stays flat, you'll end up holding all ZRO. This is ['impermanent' loss](https://www.coinbase.com/en-gb/learn/crypto-glossary/what-is-impermanent-loss#:~:text=Impermanent%20loss%20is%20a%20risk,returns%20to%20its%20original%20value.)
+
+Obviously you are compensated for this risk you are taking as LP - on uniswap, purely by fees as people trade against the liquidity in the pool. On ramses, these are topped up by RAM (and now ARB) incentives, meaning positions can yield hundreds of % APY. 
+
+Providing CL is fundamentally a short volatility bet - you will make money if volatility is low, as the fees you get while your position is in range will more than compensate you for the IL. You will lose money if volatility is high, as you'll end up holding the token that performs least well, while only getting fees/incentives while your position is in range. 
+
+As I thought more about how to maximise my upside and minimise my downside when taking these type of bets, I stumbled onto an idea for somewhat mitigating the risk presented by IL.
+
+### Dynamic Delta Hedging
+
+At the point where the position is purely ETH (i.e. where relative ZRO/ETH price is high) our risk is easy to understand. As the position moves through the range (i.e. the price of ZRO falls relative to ETH), in effect the position holders ETH is swapped for ZRO. 
+
+Again: as the relative price of ZRO ***falls***, as the position holder we hold more and more ZRO, and less and less ETH. 
+
+So, what if we could hedge off these exposures and maintain (roughly) a simple long ETH position?
+
+### Enter Hyperliquid
+
+[Hyperliquid](https://app.hyperliquid.xyz/join/DEFIBUILDERETH) (ref link) has become one of the most liquid perp exchanges in the world. They offer both ZRO and ETH perps, so using their api we could monitor how much ZRO exposure we have, and take a simple pair trade (short ZRO, long ETH for equal size) to maintain a risk profile similar to simply holding ETH.
+
+A few days cracking away with my quant claude, and we have a [working POC](https://github.com/defibuildereth/ramses-hl-hedgoor). 
+
+This bot:
+- looks for a ramses NFT representing a ZRO/ETH CL position held by that address
+- subscribes to hyperliquid's websocket for ZRO and ETH price updates
+- calculates how much ETH and ZRO the ramses position equates to at current prices (assumes no arbitrage between ramses and hyperliquid)
+- querys hyperliquid's api for any ZRO and ETH positions held
+- hedges off ZRO exposure (i.e. shorts the amount of ZRO held), and longs the equivalent $ amount of ETH, subject to the amounts being greater than threshold (set on lines 10 and 11)
+
+After 1 night's testing (with a 3 tick CL position worth around 8k, and 4k USD margin in hyperliquid), our PNL is as follows:
+
+Ramses rewards +$23.10
+Hyperliquid fees -$7.88 (9 pairs of trades)
+Hyperliquid funding +$0.46
+Total +$15.68
+
+Rounding this to $1/hr, implies about 70% APY. Not amazing, but certainly some potential there. I've also ignored the potential value of hyperliquid points, which (given $20k total volume traded) this bot will likely generate. But that said, I tested this on a Friday night which saw very little volatility, so my feeling is that the hedgoor, like the ramses position itself, will do very well in low volatility conditions, but rack up tons of fees in times of higher volatility.
+
+As always, don't come crying to me if you lose money. Particularly, if you set the threshold too low relative to the amount held in the Ramses position, the bot will trade far too frequently and you'll spend more in fees than you get in rewards. Also, if you don't leave enough USD for margin in hyperliquid, you'll get liquidated. NFA, DYOR, NBA etc. 
+
+One big potential improvement would be to get the bot to place limit orders rather than market orders. Liquidity [takers pay 0.035%](https://hyperliquid.gitbook.io/hyperliquid-docs/trading/fees) on hyperliquid, while makers pay 0.01%, so we could likely reduce the biggest cost of running the bot by 70% or so just with this one change.
+
+I think that's about it for now - if anyone else is playing with this stuff, reach out to me on Twitter/Discord, or submit a PR on github.
+
+GL out there!
+
+D
